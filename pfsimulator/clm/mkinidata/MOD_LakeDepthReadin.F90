@@ -79,7 +79,7 @@ CONTAINS
       !CALL ncio_read_vector (lndname, 'lakedepth_patches', landpatch, lakedepth)
 #endif
 
-      lakedepth = sum(dzlak(1:nl_lake))
+      lakedepth(:) = sum(dzlak(1:nl_lake))
 
       ! Define lake levels
       IF (p_is_worker) THEN
