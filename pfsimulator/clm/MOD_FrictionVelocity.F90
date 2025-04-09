@@ -229,6 +229,7 @@ CONTAINS
 
 ! wind profile
       zldis=hu-displa
+      if (zldis < 0.0d0) zldis = 5.0d0
       zeta=zldis/obu
       zetam=1.574
       IF(zeta < -zetam)THEN           ! zeta < -1
@@ -249,6 +250,7 @@ CONTAINS
       ! for canopy top wind-velocity
       !NOTE: changed for canopy top wind-velocity (no wake assumed)
       zldis=htop-displa
+      if (zldis < 0.0d0) zldis = 5.0d0
       zeta=zldis/obu
       zetam=1.574
       IF(zeta < -zetam)THEN           ! zeta < -1
@@ -264,6 +266,7 @@ CONTAINS
 
 ! temperature profile
       zldis=ht-displa
+      if (zldis < 0.0d0) zldis = 5.0d0
       zeta=zldis/obu
       zetat=0.465
       IF(zeta < -zetat)THEN           ! zeta < -1
@@ -279,6 +282,7 @@ CONTAINS
 
       ! for 2 meter screen temperature
       zldis=2.+z0h  ! ht-displa
+      if (zldis < 0.0d0) zldis = 5.0d0
       zeta=zldis/obu
       zetat=0.465
       IF(zeta < -zetat)THEN           ! zeta < -1
@@ -294,6 +298,7 @@ CONTAINS
 
       ! for top layer temperature
       zldis=displat+z0mt-displa  ! ht-displa
+      if (zldis < 0.0d0) zldis = 5.0d0
       zeta=zldis/obu
       zetat=0.465
       IF(zeta < -zetat)THEN           ! zeta < -1
@@ -310,6 +315,7 @@ CONTAINS
       ! for canopy top phi(h)
       ! CESM TECH NOTE EQ. (5.31)
       zldis=htop-displa  ! ht-displa
+      if (zldis < 0.0d0) zldis = 5.0d0
       zeta=zldis/obu
       zetat=0.465
       IF(zeta < -zetat)THEN           ! zeta < -1
@@ -324,6 +330,7 @@ CONTAINS
 
 ! humidity profile
       zldis=hq-displa
+      if (zldis < 0.0d0) zldis = 5.0d0
       zeta=zldis/obu
       zetat=0.465
       IF(zeta < -zetat)THEN           ! zeta < -1
@@ -339,6 +346,7 @@ CONTAINS
 
       ! for 2 meter screen humidity
       zldis=2.+z0h
+      if (zldis < 0.0d0) zldis = 5.0d0
       zeta=zldis/obu
       zetat=0.465
       IF(zeta < -zetat)THEN           ! zeta < -1
@@ -354,6 +362,7 @@ CONTAINS
 
       ! for top layer humidity
       zldis=displat+z0mt-displa  ! ht-displa
+      if (zldis < 0.0d0) zldis = 5.0d0
       zeta=zldis/obu
       zetat=0.465
       IF(zeta < -zetat)THEN           ! zeta < -1
