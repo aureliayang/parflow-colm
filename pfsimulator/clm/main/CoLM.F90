@@ -555,7 +555,8 @@ if (time == start_time_pf) then !initialization
       allocate (grid(nx,ny)) 
 
       call drv_readvegtf (grid, nx, ny, ix, iy, gnx, gny, rank)
-      call drv_g2clm (grid,nx,ny,planar_mask,numpatch)
+      !call drv_g2clm (grid,nx,ny,planar_mask,numpatch)
+      call rd_soil_properties(grid,nx,ny,planar_mask,numpatch)
 
       deallocate (grid)
 

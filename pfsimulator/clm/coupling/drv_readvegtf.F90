@@ -71,11 +71,11 @@ subroutine drv_readvegtf (grid, nx, ny, ix, iy, gnx, gny, rank)
                   grid(c-ix,r-iy)%patchlonr,                                &       
                   grid(c-ix,r-iy)%patchlatr,                                &
                   !(grid(c-ix,r-iy)%vf_quartz(t),t=1,nl_soil),               &
-                  (grid(c-ix,r-iy)%vf_gravels(t),t=1,nl_soil),              &
-                  (grid(c-ix,r-iy)%vf_om(t),t=1,nl_soil),                   &
-                  (grid(c-ix,r-iy)%vf_sand(t),t=1,nl_soil),                 &
-                  (grid(c-ix,r-iy)%wf_gravels(t),t=1,nl_soil),              &
-                  (grid(c-ix,r-iy)%wf_sand(t),t=1,nl_soil),                 &
+                  (grid(c-ix,r-iy)%int_soil_grav_l(t),t=1,8),              &
+                  (grid(c-ix,r-iy)%int_soil_sand_l(t),t=1,8),                   &
+                  (grid(c-ix,r-iy)%int_soil_clay_l(t),t=1,8),                 &
+                  (grid(c-ix,r-iy)%int_soil_oc_l(t),t=1,8),              &
+                  (grid(c-ix,r-iy)%int_soil_bd_l(t),t=1,8)
                   !(grid(c-ix,r-iy)%psi0(t),t=1,nl_soil),                    &
                   !(grid(c-ix,r-iy)%bsw(t),t=1,nl_soil),                     &
                   !(grid(c-ix,r-iy)%theta_r(t),t=1,nl_soil),                 &
@@ -83,11 +83,11 @@ subroutine drv_readvegtf (grid, nx, ny, ix, iy, gnx, gny, rank)
                   !(grid(c-ix,r-iy)%n_vgm(t),t=1,nl_soil),                   &
                   !(grid(c-ix,r-iy)%L_vgm(t),t=1,nl_soil),                   &
                   !(grid(c-ix,r-iy)%hksati(t),t=1,nl_soil),                  &
-                  (grid(c-ix,r-iy)%csol(t),t=1,nl_soil),                    &
-                  (grid(c-ix,r-iy)%k_solids(t),t=1,nl_soil),                &
-                  (grid(c-ix,r-iy)%dksatu(t),t=1,nl_soil),                  &
-                  (grid(c-ix,r-iy)%dksatf(t),t=1,nl_soil),                  &
-                  (grid(c-ix,r-iy)%dkdry(t),t=1,nl_soil)
+                  !(grid(c-ix,r-iy)%csol(t),t=1,nl_soil),                    &
+                  !(grid(c-ix,r-iy)%k_solids(t),t=1,nl_soil),                &
+                  !(grid(c-ix,r-iy)%dksatu(t),t=1,nl_soil),                  &
+                  !(grid(c-ix,r-iy)%dksatf(t),t=1,nl_soil),                  &
+                  !(grid(c-ix,r-iy)%dkdry(t),t=1,nl_soil)
                   !(grid(c-ix,r-iy)%BA_alpha(t),t=1,nl_soil),                &
                   !(grid(c-ix,r-iy)%BA_beta(t),t=1,nl_soil)
                   !(grid(c-ix,r-iy)%OM_density(t),t=1,nl_soil),              &
