@@ -15,7 +15,7 @@ Set the environment variable `PARFLOW_DIR` to the chosen location:
 ```shell
    export PARFLOW_VERSION=3.10
    export PARFLOW_INS=/home/cy15/pf-colm
-   export PF_SRC=/home/cy15/pf-colm/parflow/
+   #export PF_SRC=/home/cy15/pf-colm/parflow/
 
    module load cmake/3.18.2
    module load openmpi/gcc/4.1.6
@@ -63,13 +63,11 @@ is a minimal example of an MPI build with CLM:
    cd build
    cmake  .. \
           -DPARFLOW_AMPS_LAYER=mpi1 \
-	  -DPARFLOW_ENABLE_PYTHON=TRUE \
 	  -DPARFLOW_AMPS_SEQUENTIAL_IO=TRUE \
 	  -DHYPRE_ROOT=$HYPRE_DIR \
 	  -DPARFLOW_ENABLE_TIMING=TRUE \
 	  -DPARFLOW_HAVE_CLM=TRUE \
-	  -DCMAKE_INSTALL_PREFIX=$PARFLOW_DIR \
-	  -DPARFLOW_PYTHON_VIRTUAL_ENV=ON
+	  -DCMAKE_INSTALL_PREFIX=$PARFLOW_DIR
 ```
 
 ### Step 4: Building and installing
