@@ -823,7 +823,7 @@ SUBROUTINE CoLMMAIN ( &
                ENDIF
             ENDIF
          ENDIF
-   
+
          ! Set zero to the empty node
          IF (snl > maxsnl) THEN
             wice_soisno(maxsnl+1:snl) = 0.
@@ -1238,7 +1238,7 @@ SUBROUTINE CoLMMAIN ( &
          ELSE
             xerr = 0.
          ENDIF
-   
+
          ! Set zero to the empty node
          IF (snl > maxsnl) THEN
             wice_soisno(maxsnl+1:snl) = 0.

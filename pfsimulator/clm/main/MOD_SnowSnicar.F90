@@ -2712,6 +2712,56 @@ CONTAINS
    END SUBROUTINE SnowAge_grain
    !-----------------------------------------------------------------------
 
+   SUBROUTINE SnowAge_init()
+
+      !USE MOD_NetCDFSerial
+
+      IMPLICIT NONE
+
+      !character(len=256), intent(in) :: fsnowaging      ! snow aging parameters file name
+      character(len= 32) :: subname = 'SnowAge_init'    ! SUBROUTINE name
+      integer i,j,k
+         !!
+         !! Open snow aging (effective radius evolution) file:
+         !IF (p_is_master) THEN
+         !   write(iulog,*) 'Attempting to read snow aging parameters .....'
+         !   write(iulog,*) subname,trim(fsnowaging)
+         !ENDIF
+
+         !!
+         !! SNOW aging parameters
+         !!
+         !CALL ncio_read_bcast_serial (fsnowaging, 'tau', snowage_tau)
+         !CALL ncio_read_bcast_serial (fsnowaging, 'kappa', snowage_kappa)
+         !CALL ncio_read_bcast_serial (fsnowaging, 'drdsdt0', snowage_drdt0)
+
+         !!
+         !IF (p_is_master) THEN
+         !   write(iulog,*) 'Successfully read snow aging properties'
+         !ENDIF
+
+         allocate (snowage_tau   (8,31,11)) ! (idx_rhos_max,idx_Tgrd_max,idx_T_max)  ! snow aging parameter retrieved from lookup table [hour]
+         allocate (snowage_kappa (8,31,11)) ! (idx_rhos_max,idx_Tgrd_max,idx_T_max)  ! snow aging parameter retrieved from lookup table [unitless]
+         allocate (snowage_drdt0 (8,31,11)) ! (idx_rhos_max,idx_Tgrd_max,idx_T_max)  ! snow aging parameter retrieved from lookup table [um hr-1]
+
+         open(2,file=trim(adjustl('snicar_par.dat')),form='formatted',action='read')
+         do k = 1,11
+            do j = 1,31
+               do i = 1,8
+                  read(2,*) snowage_tau(i,j,k), snowage_kappa(i,j,k), snowage_drdt0(i,j,k)
+               end do
+            end do
+         end do
+         close(2)
+
+         ! ! print some diagnostics:
+         ! IF (p_is_master) THEN
+         !    write (*,100) 'SNICAR: snowage tau for T=263K, dTdz = 100 K/m, rhos = 150 kg/m3: ', snowage_tau(3,11,9)
+         !    write (*,100) 'SNICAR: snowage kappa for T=263K, dTdz = 100 K/m, rhos = 150 kg/m3: ', snowage_kappa(3,11,9)
+         !    write (*,100) 'SNICAR: snowage dr/dt_0 for T=263K, dTdz = 100 K/m, rhos = 150 kg/m3: ', snowage_drdt0(3,11,9)
+         ! ENDIF
+
+   END SUBROUTINE SnowAge_init
    !-----------------------------------------------------------------------
 
 

@@ -103,7 +103,7 @@ SUBROUTINE CLM_LSM(pressure,saturation,evap_trans,topo,porosity,pf_dz_mult,istep
 #endif
 
    ! SNICAR
-   !USE MOD_SnowSnicar, only: SnowAge_init, SnowOptics_init
+   USE MOD_SnowSnicar, only: SnowAge_init !, SnowOptics_init
    !USE MOD_Aerosol, only: AerosolDepInit, AerosolDepReadin
 
 #ifdef DataAssimilation
@@ -488,7 +488,7 @@ if (time == start_time_pf) then !initialization
 
       ! Read in SNICAR optical and aging parameters
       !CALL SnowOptics_init( DEF_file_snowoptics ) ! SNICAR optical parameters
-      !CALL SnowAge_init( DEF_file_snowaging )     ! SNICAR aging   parameters
+      CALL SnowAge_init()     ! SNICAR aging   parameters
 
       ! ----------------------------------------------------------------------
       doalb = .true.
