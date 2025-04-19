@@ -2720,7 +2720,7 @@ CONTAINS
 
       !character(len=256), intent(in) :: fsnowaging      ! snow aging parameters file name
       character(len= 32) :: subname = 'SnowAge_init'    ! SUBROUTINE name
-      integer i,j,k
+      integer :: i,j,k
          !!
          !! Open snow aging (effective radius evolution) file:
          !IF (p_is_master) THEN
@@ -2754,12 +2754,12 @@ CONTAINS
          end do
          close(2)
 
-         ! ! print some diagnostics:
-         ! IF (p_is_master) THEN
-         !    write (*,100) 'SNICAR: snowage tau for T=263K, dTdz = 100 K/m, rhos = 150 kg/m3: ', snowage_tau(3,11,9)
-         !    write (*,100) 'SNICAR: snowage kappa for T=263K, dTdz = 100 K/m, rhos = 150 kg/m3: ', snowage_kappa(3,11,9)
-         !    write (*,100) 'SNICAR: snowage dr/dt_0 for T=263K, dTdz = 100 K/m, rhos = 150 kg/m3: ', snowage_drdt0(3,11,9)
-         ! ENDIF
+         ! print some diagnostics:
+         IF (p_is_master) THEN
+            write (*,*) 'SNICAR: snowage tau for T=263K, dTdz = 100 K/m, rhos = 150 kg/m3: ', snowage_tau(3,11,9)
+            write (*,*) 'SNICAR: snowage kappa for T=263K, dTdz = 100 K/m, rhos = 150 kg/m3: ', snowage_kappa(3,11,9)
+            write (*,*) 'SNICAR: snowage dr/dt_0 for T=263K, dTdz = 100 K/m, rhos = 150 kg/m3: ', snowage_drdt0(3,11,9)
+         ENDIF
 
    END SUBROUTINE SnowAge_init
    !-----------------------------------------------------------------------
