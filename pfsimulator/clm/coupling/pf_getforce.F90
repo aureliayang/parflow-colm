@@ -84,9 +84,9 @@ subroutine pf_getforce (nx,ny,sw_pf,lw_pf,prcp_pf,tas_pf,u_pf,v_pf, &
 !=== Increment Time Step Counter
 ! clm%istep=clm%istep+1 
 ! clm%istep=istep_pf
-  forc_hgt_u = 10.d0
-  forc_hgt_t = 2.d0
-  forc_hgt_q = 2.d0
+  forc_hgt_u = 50.d0
+  forc_hgt_t = 40.d0
+  forc_hgt_q = 40.d0
 
 ! Valdai - 1D Met data
 
