@@ -148,7 +148,7 @@ CONCN.dzScale.nzListNumber = 11
 # note this is opposite Noah/WRF
 # layers are 0.1 m, 0.3 m, 0.6 m, 1.0 m, 5.0 m, 10.0 m, 25.0 m, 50.0 m, 100.0m, 200.0 m
 # 200 m * 1.5 = 300 m
-CONCN.Cell._0.dzScale.Value = 10/200
+CONCN.Cell._0.dzScale.Value = 100/200
 # 200 m * .5 = 100 m
 CONCN.Cell._1.dzScale.Value = (3.4331-2.2961)/200
 # 200 m * .25 = 50 m
@@ -333,7 +333,7 @@ CONCN.Gravity = 1.0
 CONCN.TimingInfo.BaseUnit = 1.0
 CONCN.TimingInfo.StartCount = 0
 CONCN.TimingInfo.StartTime = 0
-CONCN.TimingInfo.StopTime = 72*20
+CONCN.TimingInfo.StopTime = 8760
 #CONCN.TimingInfo.StopTime = curr_step + 2
 CONCN.TimingInfo.DumpInterval = 1.
 CONCN.TimeStep.Type = 'Constant'
@@ -737,7 +737,8 @@ CONCN.Solver.CLM.Print1dOut        = False
 CONCN.Solver.CLM.CLMDumpInterval   = 1
 
 CONCN.Solver.CLM.MetForcing        = '1D'
-CONCN.Solver.CLM.MetFileName       = 'forcing_singleColumn_3days_CONUS2.prn'
+#CONCN.Solver.CLM.MetFileName       = 'forcing_singleColumn_3days_CONUS2.prn'
+CONCN.Solver.CLM.MetFileName       = 'station0.txt'
 CONCN.Solver.CLM.MetFilePath       = './' 
 CONCN.Solver.CLM.MetFileNT         = 24
 CONCN.Solver.CLM.IstepStart        = 1

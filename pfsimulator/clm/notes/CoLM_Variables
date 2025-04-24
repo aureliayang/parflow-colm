@@ -323,7 +323,9 @@ r8
 #MOD_PlantHydraulic.F90
 precision issue
 #MOD_SnowSnicar.F90
-remove two subroutines
+remove one subroutine, edit init subroutine
+#MOD_FrictionVelocity.F90
+if (zldis < 0.0d0) zldis = 5.0d0
 
 #MOD_SoilSnowHydrology.F90
 a lot
