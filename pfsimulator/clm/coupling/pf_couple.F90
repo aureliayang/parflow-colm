@@ -10,8 +10,8 @@ subroutine pf_couple(evap_trans,saturation,pressure,porosity,pf_dz_mult,pdz,nx,n
   !use clm_varcon, only : denh2o, denice, istwet, istice
    USE MOD_Precision
    USE MOD_Vars_TimeInvariants, only: patchclass
-   USE MOD_Vars_TimeVariables, only: pf_flux, rootr
-   USE MOD_Vars_1DFluxes, only: qinfl, etr, qinfl_old, etr_old !, qseva
+   USE MOD_Vars_TimeVariables, only: rootr
+   USE MOD_Vars_1DFluxes, only: pf_flux, qinfl, etr, qinfl_old, etr_old !, qseva
    USE MOD_Vars_Global, only: nl_soil, dz_soi
    implicit none
 

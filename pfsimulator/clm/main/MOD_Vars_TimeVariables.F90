@@ -370,7 +370,6 @@ ENDIF
 END MODULE MOD_Vars_PFTimeVariables
 
 
-
 MODULE MOD_Vars_TimeVariables
 ! -------------------------------
 ! Created by Yongjiu Dai, 03/2014
@@ -506,10 +505,6 @@ MODULE MOD_Vars_TimeVariables
    real(r8), allocatable :: rnetday                       (:) ! daily net radiation flux [MJ/m2/day]
    real(r8), allocatable :: fgrndday                      (:) ! daily ground heat flux [MJ/m2/day]
    real(r8), allocatable :: potential_evapotranspiration  (:) ! daily potential evapotranspiration [mm/day]
-
-   real(r8), allocatable :: pf_vol_liq  (:,:)
-   real(r8), allocatable :: pf_press    (:,:)
-   real(r8), allocatable :: pf_flux     (:,:)
 
    integer , allocatable :: irrig_method_corn      (:) ! irrigation method for corn (0-3)
    integer , allocatable :: irrig_method_swheat    (:) ! irrigation method for spring wheat (0-3)
@@ -662,10 +657,6 @@ CONTAINS
             allocate ( rnetday                    (numpatch)); rnetday                (:) = spval
             allocate ( fgrndday                   (numpatch)); fgrndday               (:) = spval
             allocate ( potential_evapotranspiration(numpatch)); potential_evapotranspiration(:) = spval
-
-            allocate (pf_vol_liq  (1:nl_soil,numpatch)); pf_vol_liq (:,:) = spval
-            allocate (pf_press    (1:nl_soil,numpatch)); pf_press   (:,:) = spval
-            allocate (pf_flux     (1:nl_soil,numpatch)); pf_flux    (:,:) = spval
 
             allocate ( irrig_method_corn          (numpatch)); irrig_method_corn      (:) = spval_i4
             allocate ( irrig_method_swheat        (numpatch)); irrig_method_swheat    (:) = spval_i4
@@ -825,10 +816,6 @@ CONTAINS
             deallocate (rnetday                )
             deallocate (fgrndday               )
             deallocate (potential_evapotranspiration)
-
-            deallocate (pf_vol_liq             )
-            deallocate (pf_press               )
-            deallocate (pf_flux                )
 
             deallocate ( irrig_method_corn     )
             deallocate ( irrig_method_swheat   )

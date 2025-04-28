@@ -11,7 +11,8 @@ subroutine pfreadout(saturation,pressure,nx,ny,nz,j_incr,k_incr,numpatch,topo_ma
 
   USE MOD_Precision
   USE MOD_Vars_TimeInvariants, only: porsl
-  USE MOD_Vars_TimeVariables, only: wliq_soisno, pf_vol_liq, pf_press
+  USE MOD_Vars_TimeVariables, only: wliq_soisno
+  USE MOD_Vars_1DFluxes, only: pf_vol_liq, pf_press
   USE MOD_Const_Physical, only: denh2o
   USE MOD_Vars_Global, only: nl_soil, dz_soi
 

@@ -72,6 +72,9 @@ MODULE MOD_Vars_1DFluxes
    real(r8), allocatable :: qseva  (:)
    real(r8), allocatable :: qinfl_old  (:) !interception (mm h2o/s)
    real(r8), allocatable :: etr_old    (:) !transpiration rate [mm/s]
+   real(r8), allocatable :: pf_vol_liq  (:,:)
+   real(r8), allocatable :: pf_press    (:,:)
+   real(r8), allocatable :: pf_flux     (:,:)
 
    real(r8), allocatable :: qcharge(:) !groundwater recharge [mm/s]
 
@@ -152,6 +155,9 @@ CONTAINS
             allocate ( qseva  (numpatch) )  ; qseva  (:) = spval
             allocate ( qinfl_old  (numpatch) )  ; qinfl_old  (:) = spval ! inflitration (mm h2o/s)
             allocate ( etr_old    (numpatch) )  ; etr_old    (:) = spval ! transpiration rate [mm/s]
+            allocate (pf_vol_liq  (1:nl_soil,numpatch)); pf_vol_liq (:,:) = spval
+            allocate (pf_press    (1:nl_soil,numpatch)); pf_press   (:,:) = spval
+            allocate (pf_flux     (1:nl_soil,numpatch)); pf_flux    (:,:) = spval
 
             allocate ( qcharge(numpatch) )  ; qcharge(:) = spval ! groundwater recharge [mm/s]
 
@@ -237,6 +243,9 @@ CONTAINS
             deallocate ( assim   )  ! canopy assimilation rate (mol m-2 s-1)
             deallocate ( respc   )  ! canopy respiration (mol m-2 s-1)
             deallocate ( qseva   )
+            deallocate (pf_vol_liq             )
+            deallocate (pf_press               )
+            deallocate (pf_flux                )
 
             deallocate ( qcharge )  ! groundwater recharge [mm/s]
 

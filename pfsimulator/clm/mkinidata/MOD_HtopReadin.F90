@@ -44,7 +44,7 @@ CONTAINS
    character(len=256) :: landdir, lndname, cyear
    integer :: i,j,t,p,ps,pe,m,n,npatch
 
-   !real(r8), allocatable :: htoplc  (:)
+   real(r8), allocatable :: htoplc  (:)
    real(r8), allocatable :: htoppft (:)
    integer, intent(in) :: numpatch
 
@@ -73,6 +73,7 @@ CONTAINS
 #else
       lndname = trim(landdir)//'/htop_patches.nc'
       !CALL ncio_read_vector (lndname, 'htop_patches', landpatch, htoplc)
+      allocate (htoplc (numpatch))
 #endif
 
       IF (p_is_worker) THEN
@@ -96,7 +97,7 @@ CONTAINS
          ENDDO
       ENDIF
 
-      !IF (allocated(htoplc))   deallocate ( htoplc )
+      IF (allocated(htoplc))   deallocate ( htoplc )
 #endif
 
 
