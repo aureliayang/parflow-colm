@@ -35,6 +35,8 @@ MODULE MOD_Namelist
 
    type (nl_domain_type) :: DEF_domain
 
+   logical  :: DEF_hotstart    = .false.
+
 ! ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 ! ----- Part 2: blocks and MPI  -----
 ! ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -777,6 +779,7 @@ CONTAINS
    namelist /nl_colm/          &
       DEF_CASE_NAME,           &
       DEF_domain,              &
+      DEF_hotstart,           &
 
       SITE_fsrfdata,            &
       USE_SITE_pctpfts,         &

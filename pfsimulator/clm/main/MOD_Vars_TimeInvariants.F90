@@ -266,8 +266,8 @@ MODULE MOD_Vars_TimeInvariants
 ! PUBLIC MEMBER FUNCTIONS:
    PUBLIC :: allocate_TimeInvariants
    PUBLIC :: deallocate_TimeInvariants
-   !PUBLIC :: READ_TimeInvariants
-   !PUBLIC :: WRITE_TimeInvariants
+   PUBLIC :: READ_TimeInvariants
+   PUBLIC :: WRITE_TimeInvariants
 
 ! PRIVATE MEMBER FUNCTIONS:
 
@@ -378,6 +378,223 @@ CONTAINS
    END SUBROUTINE allocate_TimeInvariants
 
    !---------------------------------------
+   SUBROUTINE WRITE_TimeInvariants (rank)
+
+      USE MOD_SPMD_Task
+      USE MOD_Namelist, only : DEF_USE_BEDROCK, DEF_USE_Forcing_Downscaling
+
+      IMPLICIT NONE
+      integer :: rank
+      character*100 RI
+
+      IF (p_is_master) THEN
+         write(*,'(A29)') 'Write Time Invariants done.'
+      ENDIF
+
+      write(RI,*) rank
+      open(40,file='CoLM.TimeInvariants.rst.'//trim(adjustl(RI)),form='unformatted')
+
+      write(40) patchclass
+      write(40) patchtype
+      write(40) patchmask
+
+      write(40) patchlonr
+      write(40) patchlatr
+
+      write(40) lakedepth
+      write(40) dz_lake
+
+      write(40) soil_s_v_alb
+      write(40) soil_d_v_alb
+      write(40) soil_s_n_alb
+      write(40) soil_d_n_alb
+
+      write(40) vf_quartz
+      write(40) vf_gravels
+      write(40) vf_om
+      write(40) vf_sand
+      write(40) wf_gravels
+      write(40) wf_sand
+      write(40) OM_density
+      write(40) BD_all
+      write(40) wfc
+      write(40) porsl
+      write(40) psi0
+      write(40) bsw
+      write(40) theta_r
+      write(40) BVIC
+
+#ifdef vanGenuchten_Mualem_SOIL_MODEL
+      write(40) alpha_vgm
+      write(40) L_vgm
+      write(40) n_vgm
+      write(40) sc_vgm
+      write(40) fc_vgm
+#endif
+
+      write(40) vic_b_infilt
+      write(40) vic_Dsmax
+      write(40) vic_Ds
+      write(40) vic_Ws
+      write(40) vic_c
+
+      write(40) hksati
+      write(40) csol
+      write(40) k_solids
+      write(40) dksatu
+      write(40) dksatf
+      write(40) dkdry
+      write(40) BA_alpha
+      write(40) BA_beta
+
+      write(40) htop
+      write(40) hbot
+
+      IF(DEF_USE_BEDROCK)THEN
+          write(40) dbedrock
+          write(40) ibedrock
+      ENDIF
+
+      write(40) topoelv
+      write(40) topostd
+
+      IF (DEF_USE_Forcing_Downscaling) THEN
+         write(40) svf_patches
+         write(40) cur_patches
+         write(40) slp_type_patches
+         write(40) asp_type_patches
+         write(40) area_type_patches
+         write(40) sf_lut_patches
+      ENDIF
+
+      write(40) zlnd
+      write(40) zsno
+      write(40) csoilc
+      write(40) dewmx
+      write(40) wtfact
+      write(40) capr
+      write(40) cnfac
+      write(40) ssi
+      write(40) wimp
+      write(40) pondmx
+      write(40) smpmax
+      write(40) smpmin
+      write(40) trsmx0
+      write(40) tcrit
+      write(40) wetwatmax
+
+      close(40)
+
+   END SUBROUTINE WRITE_TimeInvariants
+
+   SUBROUTINE READ_TimeInvariants (rank)
+
+      USE MOD_SPMD_Task
+      USE MOD_Namelist, only : DEF_USE_BEDROCK, DEF_USE_Forcing_Downscaling
+
+      IMPLICIT NONE
+      integer :: rank
+      character*100 RI
+
+      write(RI,*) rank
+      open(40,file='CoLM.TimeInvariants.rst.'//trim(adjustl(RI)),form='unformatted')
+
+      read(40) patchclass
+      read(40) patchtype
+      read(40) patchmask
+
+      read(40) patchlonr
+      read(40) patchlatr
+
+      read(40) lakedepth
+      read(40) dz_lake
+
+      read(40) soil_s_v_alb
+      read(40) soil_d_v_alb
+      read(40) soil_s_n_alb
+      read(40) soil_d_n_alb
+
+      read(40) vf_quartz
+      read(40) vf_gravels
+      read(40) vf_om
+      read(40) vf_sand
+      read(40) wf_gravels
+      read(40) wf_sand
+      read(40) OM_density
+      read(40) BD_all
+      read(40) wfc
+      read(40) porsl
+      read(40) psi0
+      read(40) bsw
+      read(40) theta_r
+      read(40) BVIC
+
+#ifdef vanGenuchten_Mualem_SOIL_MODEL
+      read(40) alpha_vgm
+      read(40) L_vgm
+      read(40) n_vgm
+      read(40) sc_vgm
+      read(40) fc_vgm
+#endif
+
+      read(40) vic_b_infilt
+      read(40) vic_Dsmax
+      read(40) vic_Ds
+      read(40) vic_Ws
+      read(40) vic_c
+
+      read(40) hksati
+      read(40) csol
+      read(40) k_solids
+      read(40) dksatu
+      read(40) dksatf
+      read(40) dkdry
+      read(40) BA_alpha
+      read(40) BA_beta
+
+      read(40) htop
+      read(40) hbot
+
+      IF(DEF_USE_BEDROCK)THEN
+          read(40) dbedrock
+          read(40) ibedrock
+      ENDIF
+
+      read(40) topoelv
+      read(40) topostd
+
+      IF (DEF_USE_Forcing_Downscaling) THEN
+         read(40) svf_patches
+         read(40) cur_patches
+         read(40) slp_type_patches
+         read(40) asp_type_patches
+         read(40) area_type_patches
+         read(40) sf_lut_patches
+      ENDIF
+
+      read(40) zlnd
+      read(40) zsno
+      read(40) csoilc
+      read(40) dewmx
+      read(40) wtfact
+      read(40) capr
+      read(40) cnfac
+      read(40) ssi
+      read(40) wimp
+      read(40) pondmx
+      read(40) smpmax
+      read(40) smpmin
+      read(40) trsmx0
+      read(40) tcrit
+      read(40) wetwatmax
+
+      close(40)
+
+      IF (p_is_master) THEN
+         write(*,'(A29)') 'Loading Time Invariants done.'
+      ENDIF
+
+   END SUBROUTINE READ_TimeInvariants
 
    SUBROUTINE deallocate_TimeInvariants (numpatch)
 

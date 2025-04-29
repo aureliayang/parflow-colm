@@ -463,7 +463,7 @@ if (time == start_time_pf) then !initialization
       !CALL adj2end(edate)
       !CALL adj2end(pdate)
 
-      !ststamp = sdate
+      ststamp = sdate
       !etstamp = edate
       !ptstamp = pdate  !e and p are not used anymore
 
@@ -550,7 +550,7 @@ if (time == start_time_pf) then !initialization
 #endif
 
       idate   = sdate
-      !itstamp = ststamp
+      itstamp = ststamp
 
       allocate (grid(nx,ny)) 
 
@@ -561,6 +561,12 @@ if (time == start_time_pf) then !initialization
       deallocate (grid)
 
       call CoLMINI(jdate, numpatch)
+      CALL WRITE_TimeInvariants(rank)
+
+      if (DEF_hotstart) then
+         CALL READ_TimeInvariants(rank)
+         CALL READ_TimeVariables(rank)
+      end if
 
       do t = 1, numpatch  
 
@@ -653,7 +659,7 @@ endif
          ! Calendar for NEXT time step
          ! ----------------------------------------------------------------------
          CALL TICKTIME (deltim,idate)
-         !itstamp = itstamp + int(deltim)
+         itstamp = itstamp + int(deltim)
          jdate = idate
          CALL adj2begin(jdate)
 
@@ -779,18 +785,20 @@ endif
          ENDIF
 #endif
 
-!         IF (save_to_restart (idate, deltim, itstamp, ptstamp)) THEN
-!#ifdef LULCC
-!            CALL WRITE_TimeVariables (jdate, jdate(1), casename, dir_restart)
-!#else
-!            CALL WRITE_TimeVariables (jdate, lc_year,  casename, dir_restart)
-!#endif
-!#if(defined CaMa_Flood)
-!            IF (p_is_master) THEN
-!               CALL colm_cama_write_restart (jdate, lc_year,  casename, dir_restart)
-!            ENDIF
-!#endif
-!         ENDIF
+         IF (save_to_restart (idate, deltim, itstamp, ptstamp)) THEN
+#ifdef LULCC
+            CALL WRITE_TimeVariables (jdate, jdate(1), casename, dir_restart)
+#else
+            !CALL WRITE_TimeVariables (jdate, lc_year,  casename, dir_restart)
+             CALL WRITE_TimeVariables(istep_pf, rank)
+#endif
+#if(defined CaMa_Flood)
+            IF (p_is_master) THEN
+               CALL colm_cama_write_restart (jdate, lc_year,  casename, dir_restart)
+            ENDIF
+#endif
+         ENDIF
+
 #ifdef RangeCheck
          CALL check_TimeVariables ()
 #endif

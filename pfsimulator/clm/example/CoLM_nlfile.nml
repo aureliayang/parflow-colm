@@ -4,5 +4,14 @@
    DEF_simulation_time%start_month  = 1
    DEF_simulation_time%start_day    = 1
    DEF_simulation_time%start_sec    = 0
+   DEF_WRST_FREQ = 'DAILY'
+   DEF_hotstart = .false.
+
+   ! how to restart
+   ! check *.out.txt to get the istep which was written t*
+   !               colm1 ---- colm2 ---- colm3
+   ! initial0 ---- pf1   ---- pf2   ---- pf3
+   ! in python script: pf starttime: t*, clm istep: t* + 1
+   ! if t* = 24 hours, DEF_simulation_time%start_day    = 2
 
 /

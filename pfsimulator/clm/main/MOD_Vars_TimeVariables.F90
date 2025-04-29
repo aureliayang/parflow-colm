@@ -517,8 +517,8 @@ MODULE MOD_Vars_TimeVariables
    ! PUBLIC MEMBER FUNCTIONS:
    PUBLIC :: allocate_TimeVariables
    PUBLIC :: deallocate_TimeVariables
-   !PUBLIC :: READ_TimeVariables
-   !PUBLIC :: WRITE_TimeVariables
+   PUBLIC :: READ_TimeVariables
+   PUBLIC :: WRITE_TimeVariables
 #ifdef RangeCheck
    PUBLIC :: check_TimeVariables
 #endif
@@ -877,13 +877,261 @@ CONTAINS
       ENDSELECT
 
       IF (rwrite) THEN
-         rwrite = (ptstamp <= itstamp)
+         ! rwrite = (ptstamp <= itstamp)
       ENDIF
 
    END FUNCTION save_to_restart
 
    !---------------------------------------
+   SUBROUTINE WRITE_TimeVariables (istep_pf, rank)
 
+   !=======================================================================
+   ! Original version: Yongjiu Dai, September 15, 1999, 03/2014
+   !=======================================================================
+
+   USE MOD_SPMD_Task
+   USE MOD_Namelist, only : DEF_USE_PLANTHYDRAULICS, DEF_USE_OZONESTRESS, DEF_USE_IRRIGATION
+
+   IMPLICIT NONE
+
+   integer :: istep_pf, rank
+   character*100 RI
+
+   if(p_is_master)then
+      write(*,*)'Write CoLM Active Restart: istep_pf = ',istep_pf
+   endif
+
+   write(RI,*) rank
+   open(40,file='CoLM.TimeVariables.rst.'//trim(adjustl(RI)),form='unformatted')
+
+      write(40) z_sno
+      write(40) dz_sno
+      write(40) t_soisno
+      write(40) wliq_soisno
+      write(40) wice_soisno
+      write(40) smp
+      write(40) hk
+IF(DEF_USE_PLANTHYDRAULICS)THEN
+      write(40) vegwp
+      write(40) gs0sun
+      write(40) gs0sha
+ENDIF
+IF(DEF_USE_OZONESTRESS)THEN
+      write(40) lai_old
+      write(40) o3uptakesun
+      write(40) o3uptakesha
+ENDIF
+      write(40) t_grnd
+      write(40) tleaf
+      write(40) ldew
+      write(40) ldew_rain
+      write(40) ldew_snow
+      write(40) sag
+      write(40) scv
+      write(40) snowdp
+      write(40) fveg
+      write(40) fsno
+      write(40) sigf
+      write(40) green
+      write(40) lai
+      write(40) tlai
+      write(40) sai
+      write(40) tsai
+      write(40) coszen
+      write(40) alb
+      write(40) ssun
+      write(40) ssha
+      write(40) ssoi
+      write(40) ssno
+      write(40) thermk
+      write(40) extkb
+      write(40) extkd
+      write(40) zwt
+      write(40) wa
+      write(40) wetwat
+      write(40) wdsrf
+      write(40) rss
+
+      write(40) t_lake
+      write(40) lake_icefrac
+      write(40) savedtke1
+      write(40) snw_rds
+      write(40) mss_bcpho
+      write(40) mss_bcphi
+      write(40) mss_ocpho
+      write(40) mss_ocphi
+      write(40) mss_dst1
+      write(40) mss_dst2
+      write(40) mss_dst3
+      write(40) mss_dst4
+      write(40) ssno_lyr
+
+      write(40) trad
+      write(40) tref
+      write(40) qref
+      write(40) rst
+      write(40) emis
+      write(40) z0m
+      write(40) zol
+      write(40) rib
+      write(40) ustar
+      write(40) qstar
+      write(40) tstar
+      write(40) fm
+      write(40) fh
+      write(40) fq
+
+IF (DEF_USE_IRRIGATION) THEN
+      write(40) irrig_rate
+      write(40) deficit_irrig
+      write(40) sum_irrig
+      write(40) sum_irrig_count
+      write(40) n_irrig_steps_left
+      write(40) tairday
+      write(40) usday
+      write(40) vsday
+      write(40) pairday
+      write(40) rnetday
+      write(40) fgrndday
+      write(40) potential_evapotranspiration
+      write(40) irrig_method_corn
+      write(40) irrig_method_swheat
+      write(40) irrig_method_wwheat
+      write(40) irrig_method_soybean
+      write(40) irrig_method_cotton
+      write(40) irrig_method_rice1
+      write(40) irrig_method_rice2
+      write(40) irrig_method_sugarcane
+ENDIF
+
+   close(40)
+
+   END SUBROUTINE WRITE_TimeVariables
+
+   SUBROUTINE READ_TimeVariables (rank)
+
+      !=======================================================================
+      ! Original version: Yongjiu Dai, September 15, 1999, 03/2014
+      !=======================================================================
+
+      USE MOD_SPMD_Task
+      USE MOD_Namelist, only : DEF_USE_PLANTHYDRAULICS, DEF_USE_OZONESTRESS, DEF_USE_IRRIGATION
+
+      IMPLICIT NONE
+
+      integer :: rank
+      character*100 RI
+
+      write(RI,*) rank
+      open(40,file='CoLM.TimeVariables.rst.'//trim(adjustl(RI)),form='unformatted')
+
+         read(40) z_sno
+         read(40) dz_sno
+         read(40) t_soisno
+         read(40) wliq_soisno
+         read(40) wice_soisno
+         read(40) smp
+         read(40) hk
+   IF(DEF_USE_PLANTHYDRAULICS)THEN
+         read(40) vegwp
+         read(40) gs0sun
+         read(40) gs0sha
+   ENDIF
+   IF(DEF_USE_OZONESTRESS)THEN
+         read(40) lai_old
+         read(40) o3uptakesun
+         read(40) o3uptakesha
+   ENDIF
+         read(40) t_grnd
+         read(40) tleaf
+         read(40) ldew
+         read(40) ldew_rain
+         read(40) ldew_snow
+         read(40) sag
+         read(40) scv
+         read(40) snowdp
+         read(40) fveg
+         read(40) fsno
+         read(40) sigf
+         read(40) green
+         read(40) lai
+         read(40) tlai
+         read(40) sai
+         read(40) tsai
+         read(40) coszen
+         read(40) alb
+         read(40) ssun
+         read(40) ssha
+         read(40) ssoi
+         read(40) ssno
+         read(40) thermk
+         read(40) extkb
+         read(40) extkd
+         read(40) zwt
+         read(40) wa
+         read(40) wetwat
+         read(40) wdsrf
+         read(40) rss
+
+         read(40) t_lake
+         read(40) lake_icefrac
+         read(40) savedtke1
+         read(40) snw_rds
+         read(40) mss_bcpho
+         read(40) mss_bcphi
+         read(40) mss_ocpho
+         read(40) mss_ocphi
+         read(40) mss_dst1
+         read(40) mss_dst2
+         read(40) mss_dst3
+         read(40) mss_dst4
+         read(40) ssno_lyr
+
+         read(40) trad
+         read(40) tref
+         read(40) qref
+         read(40) rst
+         read(40) emis
+         read(40) z0m
+         read(40) zol
+         read(40) rib
+         read(40) ustar
+         read(40) qstar
+         read(40) tstar
+         read(40) fm
+         read(40) fh
+         read(40) fq
+
+   IF (DEF_USE_IRRIGATION) THEN
+         read(40) irrig_rate
+         read(40) deficit_irrig
+         read(40) sum_irrig
+         read(40) sum_irrig_count
+         read(40) n_irrig_steps_left
+         read(40) tairday
+         read(40) usday
+         read(40) vsday
+         read(40) pairday
+         read(40) rnetday
+         read(40) fgrndday
+         read(40) potential_evapotranspiration
+         read(40) irrig_method_corn
+         read(40) irrig_method_swheat
+         read(40) irrig_method_wwheat
+         read(40) irrig_method_soybean
+         read(40) irrig_method_cotton
+         read(40) irrig_method_rice1
+         read(40) irrig_method_rice2
+         read(40) irrig_method_sugarcane
+   ENDIF
+
+      close(40)
+
+      IF (p_is_master) THEN
+         write(*,'(A29)') 'Loading Time Variables done.'
+      ENDIF
+
+   END SUBROUTINE READ_TimeVariables
   !---------------------------------------
 #ifdef RangeCheck
    SUBROUTINE check_TimeVariables ()
