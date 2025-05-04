@@ -311,7 +311,7 @@ r8 precision
 #MOD_LeafInterception.F90
 line length
 #MOD_LeafTemperature.F90
-r8 precision, displa, htop
+r8 precision, zldis, hvap
 #MOD_LeafTemperaturePC.F90
 r8 precision
 #MOD_MonthlyinSituCO2MaunaLoa.F90
@@ -336,6 +336,7 @@ a lot
 #MOD_Eroot.F90
 water stress
 #MOD_Namelist.F90
+hotstart and other options
 
 I think wfc is only used in beta soil as local which is recaculated in the subroutine. 
 Though it was readin through TimeInvariants, maybe used in BGC. #also claculated in soil parameter readin
@@ -343,10 +344,10 @@ Though it was readin through TimeInvariants, maybe used in BGC. #also claculated
 you should check the upstream and downstream of rss and rootr
 
 #MOD_Vars_1DFluxes.F90
-add qseva
+add qseva etc. 6 variables
 #MOD_Vars_1DForcing.F90
 numpatch
 #MOD_Vars_TimeVariables.F90
-3 variables
+read and write subroutines
 #MOD_Vars_TimeInvariants.F90
-1 variable: htoplc  but we don't use it at all
+read and write subroutines
