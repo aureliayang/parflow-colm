@@ -85,3 +85,8 @@ An example in
 ```shell
    parflow/pfsimulator/clm/example/
 ```
+
+### Step 6: GMD paper inputs and outputs
+```shell
+   parflow/pfsimulator/clm/GMD_paper/
+```
