@@ -4,7 +4,7 @@
 
 #### GMD paper inputs and outputs
 ```shell
-parflow/pfsimulator/clm/GMD_paper/
+parflow-colm/pfsimulator/clm/GMD_paper/
 ```
 
 ## Quick Start on Unix/Linux
@@ -88,5 +88,5 @@ easy:
 ### Step 5: Run 
 An example in  
 ```shell
-   parflow/pfsimulator/clm/example/
+   parflow-colm/pfsimulator/clm/example/
 ```
