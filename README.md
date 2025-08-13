@@ -2,6 +2,11 @@
 **Twenty Years Later, All is Well: Coupling ParFlow with the Latest Common Land Model**  
 **二十年别来无恙：耦合ParFlow与最新通用陆面模式CoLM**
 
+### GMD paper inputs and outputs
+```shell
+   parflow/pfsimulator/clm/GMD_paper/
+```
+
 ## Quick Start on Unix/Linux
 
 ### Step 1: Setup
@@ -84,9 +89,4 @@ easy:
 An example in  
 ```shell
    parflow/pfsimulator/clm/example/
-```
-
-### Step 6: GMD paper inputs and outputs
-```shell
-   parflow/pfsimulator/clm/GMD_paper/
 ```
