@@ -62,7 +62,7 @@ is a minimal example of an MPI build with CLM:
    mkdir build
    cd build
    cmake  .. \
-          -DPARFLOW_AMPS_LAYER=mpi1 \
+     -DPARFLOW_AMPS_LAYER=mpi1 \
 	  -DPARFLOW_AMPS_SEQUENTIAL_IO=TRUE \
 	  -DHYPRE_ROOT=$HYPRE_DIR \
 	  -DPARFLOW_ENABLE_TIMING=TRUE \
