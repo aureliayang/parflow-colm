@@ -1,6 +1,6 @@
 #include <define.h>
 
-SUBROUTINE CLM_LSM(pressure,saturation,evap_trans,topo,porosity,pf_dz_mult,istep_pf,dt,time,           &
+SUBROUTINE CoLM_LSM(pressure,saturation,evap_trans,topo,porosity,pf_dz_mult,istep_pf,dt,time,           &
    start_time_pf,pdx,pdy,pdz,ix,iy,nx,ny,nz,nx_f,ny_f,nz_f,nz_rz,ip,npp,npq,npr,gnx,gny,rank,          &
    sw_pf,lw_pf,prcp_pf,tas_pf,u_pf,v_pf,patm_pf,qatm_pf,                                               &
    lai_pf,sai_pf,z0m_pf,displa_pf,slope_x_pf,slope_y_pf,                                               &
@@ -954,5 +954,5 @@ endif
       CALL spmd_exit
 #endif
 
-END SUBROUTINE CLM_LSM
+END SUBROUTINE CoLM_LSM
 ! ---------- EOP ------------

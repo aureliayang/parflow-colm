@@ -15,6 +15,7 @@ endif( ${PARFLOW_HAVE_RMM} )
 
 if( ${PARFLOW_HAVE_CLM} )
   target_link_libraries(parflow pfclm)
+  target_link_libraries(parflow pfcolm)
 endif( ${PARFLOW_HAVE_CLM} )
 
 if (${PARFLOW_HAVE_HYPRE})
