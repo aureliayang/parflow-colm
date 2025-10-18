@@ -2,6 +2,16 @@
 **Twenty Years Later, All is Well: Coupling ParFlow with the Latest Common Land Model**  
 **二十年别来无恙：耦合ParFlow与最新通用陆面模式CoLM**
 
+#### Please move to the following link for a complete version including both colm and clm
+、、、shell
+https://github.com/aureliayang/parflow
+、、、
+#### They will appear in the official repo soon. A pull request can be found here:
+、、、shell
+https://github.com/parflow/parflow/pull/656
+、、、
+
+
 #### GMD paper inputs and outputs
 ```shell
 parflow-colm/pfsimulator/clm/GMD_paper/
