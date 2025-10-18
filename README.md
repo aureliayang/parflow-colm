@@ -3,13 +3,13 @@
 **二十年别来无恙：耦合ParFlow与最新通用陆面模式CoLM**
 
 #### Please move to the following link for a complete version including both colm and clm
-、、、shell
+```shell
 https://github.com/aureliayang/parflow
-、、、
+```
 #### They will appear in the official repo soon. A pull request can be found here:
-、、、shell
+```shell
 https://github.com/parflow/parflow/pull/656
-、、、
+```
 
 
 #### GMD paper inputs and outputs
