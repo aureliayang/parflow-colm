@@ -14,7 +14,7 @@ https://github.com/parflow/parflow/pull/656
 
 #### GMD paper inputs and outputs
 ```shell
-parflow-colm/pfsimulator/clm/GMD_paper/
+parflow-colm/pfsimulator/colm/GMD_paper/
 ```
 
 ## Quick Start on Unix/Linux
